@@ -14,8 +14,15 @@ class PilotoAvion {
 }
 
 public class Init {
-    public static ArrayList<PilotoAvion> obtenerAquellosQueLesGustaVolarYTienenAccidentes() {
-        return null;
+    public static ArrayList<PilotoAvion> obtenerAquellosQueLesGustaVolarYTienenAccidentes(ArrayList<PilotoAvion> pilotosParam) {
+        ArrayList<PilotoAvion> listaRet = new ArrayList<PilotoAvion>();
+        
+        for (PilotoAvion p : pilotosParam) {
+            if ((p.leGustaVolar ) && (p.cantidadDeChoques > 0)) {
+                listaRet.add(p);
+            }
+        }
+        return listaRet;
     }
     public static ArrayList<PilotoAvion> obtenerAquellosQueLesGustaVolarYNOTienenAccidentes() {
         return null;
@@ -27,7 +34,12 @@ public class Init {
         return null;
     }
     public static void mostrarLista(ArrayList<PilotoAvion> pilotos) {
-        
+        for (PilotoAvion p : pilotos) {
+            System.out.println(p.nombre);
+            System.out.println(p.leGustaVolar ? "Le gusta volar" : "No le gusta volar");
+            System.out.println("Cantidad de choques: " + p.cantidadDeChoques);
+            System.out.println("");
+        }
     }
     public static ArrayList<PilotoAvion> crearLosPilotos() {
         ArrayList<PilotoAvion> pilotos = new ArrayList<PilotoAvion>();
@@ -44,6 +56,18 @@ public class Init {
         return pilotos;
     }
     public static void main(String[] args) {
+        
+        /*
+        1. crearLosPilotos()
+        2. obtenerAquellosQueLesGustaVolarYTienenAccidentes()
+        3. mostrarLista()
+        */
+        
+        mostrarLista(
+            obtenerAquellosQueLesGustaVolarYTienenAccidentes(
+                  crearLosPilotos()
+            )
+        );
         
     }
 }
